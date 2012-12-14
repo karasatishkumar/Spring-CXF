@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="FooBarService" class="com.techiekernel.service.FooBarServiceImpl" />
+
+	<bean id="fooBarWsClass" class="com.techiekernel.rest.FooBarWS">
+		<property name="fooBarService" ref="FooBarService"></property>
+	</bean>
+	<jaxrs:server id="fooBarWs" address="/foobar">
+		<jaxrs:serviceBeans>
+			<ref bean="fooBarWsClass" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+</beans>
